@@ -402,7 +402,7 @@ class Collection(ComparableObject):
     queries = ArrayProperty(Query, "queries")
 
     @staticmethod
-    def from_json(data):
+    def from_json(data, object_hook = None):
         """Return a Collection instance.
 
         This method parses a json string into a Collection object.
@@ -411,7 +411,7 @@ class Collection(ComparableObject):
 
         """
         try:
-            data = json.loads(data)
+            data = json.loads(data, object_hook = object_hook)
             kwargs = data.get('collection')
             if not kwargs:
                 raise ValueError
